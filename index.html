@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="LiP-Flow: Learning Inference-Time Priors for Codec Avatars via Normalizing Flows in Latent Space">
+  <meta name="keywords" content="LipFlow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LiP-Flow: Learning Inference-Time Priors for Codec Avatars via Normalizing Flows in Latent Space</title>
+
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HK1LLJH9GL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){window.dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-HK1LLJH9GL');
+  </script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">LiP-Flow: Learning Inference-Time Priors for Codec Avatars via Normalizing Flows in Latent Space</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://ait.ethz.ch/people/eaksan/">Emre Aksan</a><sup>1,3</sup>,</span>
+            <span class="author-block">
+              <a href="https://shugaoma.github.io/">Shugao Ma</a><sup>3</sup>,</span>
+            <span class="author-block">
+              <a href="https://akincaliskan3d.github.io/">Akin Caliskan</a><sup>2,3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://podgorskiy.com/">Stanislav Pidhorskyi</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://alexanderrichard.github.io/">Alexander Richard</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com.tw/citations?user=sFQD3k4AAAAJ&hl=en">Shih-En Wei</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=ss-IvjMAAAAJ&hl=en">Jason Saragih</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://ait.ethz.ch/people/hilliges/">Otmar Hilliges</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>ETH Zürich, Department of Computer Science</span>
+            <br>
+            <span class="author-block"><sup>2</sup>CVSSP, University of Surrey</span>
+            <br>
+            <span class="author-block"><sup>3</sup>Meta Reality Labs Research</span>
+            <br>
+            <!--<span class="author-block">  <b>In ECCV '22</b></span>-->
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://ait.ethz.ch/projects/2022/lip-flow/downloads/lipflow_eccv22.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/whuBUXfzeKs" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<section class="section_video">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/whuBUXfzeKs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Neural face avatars that are trained from multi-view data captured in camera domes can produce photo-realistic 3D reconstructions. However, at inference time, they must be driven by limited inputs such as partial views recorded by headset-mounted cameras or a front-facing camera, and sparse facial landmarks. To mitigate this asymmetry, we introduce a prior model that is conditioned on the runtime inputs and tie this prior space to the 3D face model via a normalizing flow in the latent space. Our proposed model, LiP-Flow, consists of two encoders that learn representations from the rich training-time and impoverished inference-time observations. A normalizing flow bridges the two representation spaces and transforms latent samples from one domain to another, allowing us to define a latent likelihood objective. We trained our model end-to-end to maximize the similarity of both representation spaces and the reconstruction quality, making the 3D face model aware of the limited driving signals. We conduct extensive evaluations where the latent codes are optimized to reconstruct 3D avatars from partial or sparse observations. We show that our approach leads to an expressive and effective prior, capturing facial dynamics and subtle expressions better.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
