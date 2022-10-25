@@ -108,6 +108,30 @@
     </div>
 </section>
 
+<!-- <section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Neural face avatars that are trained from multi-view data captured in camera domes can produce photo-realistic 3D reconstructions. However, at inference time, they must be driven by limited inputs such as partial views recorded by headset-mounted cameras or a front-facing camera, and sparse facial landmarks. To mitigate this asymmetry, we introduce a prior model that is conditioned on the runtime inputs and tie this prior space to the 3D face model via a normalizing flow in the latent space. Our proposed model, LiP-Flow, consists of two encoders that learn representations from the rich training-time and impoverished inference-time observations. A normalizing flow bridges the two representation spaces and transforms latent samples from one domain to another, allowing us to define a latent likelihood objective. We trained our model end-to-end to maximize the similarity of both representation spaces and the reconstruction quality, making the 3D face model aware of the limited driving signals. We conduct extensive evaluations where the latent codes are optimized to reconstruct 3D avatars from partial or sparse observations. We show that our approach leads to an expressive and effective prior, capturing facial dynamics and subtle expressions better.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>  -->
+
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <video width="100%" poster="" id="chair-tp" autoplay="" controls="" muted="" loop="" height="100%">
+        <source src="static/media/talking_reconstructionx.mp4" ,="" type="video/mp4">
+      </video>
+    </div>
+</div>
+</section>
 
 <section class="section_video">
   <div class="container is-max-desktop">
@@ -122,20 +146,159 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="method">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Neural face avatars that are trained from multi-view data captured in camera domes can produce photo-realistic 3D reconstructions. However, at inference time, they must be driven by limited inputs such as partial views recorded by headset-mounted cameras or a front-facing camera, and sparse facial landmarks. To mitigate this asymmetry, we introduce a prior model that is conditioned on the runtime inputs and tie this prior space to the 3D face model via a normalizing flow in the latent space. Our proposed model, LiP-Flow, consists of two encoders that learn representations from the rich training-time and impoverished inference-time observations. A normalizing flow bridges the two representation spaces and transforms latent samples from one domain to another, allowing us to define a latent likelihood objective. We trained our model end-to-end to maximize the similarity of both representation spaces and the reconstruction quality, making the 3D face model aware of the limited driving signals. We conduct extensive evaluations where the latent codes are optimized to reconstruct 3D avatars from partial or sparse observations. We show that our approach leads to an expressive and effective prior, capturing facial dynamics and subtle expressions better.
-          </p>
-        </div>
-      </div>
+      <h2 class="title">Overview</h2>
     </div>
+    <br/>
+    <p>
+      VR telepresence promises immersive social interactions. To experience the presence of others as genuine, such a system must provide photo-realistic 3D renderings, 
+      capture fine-grained details such as pores and hair, and produce subtle facial dynamics. 
+    </p>  
+    <br/>
+    <p>
+      Neural face avatars that are trained with <span style="color: #899bc5">multi-view imagery from a 40+ camera dome</span> can produce high-fidelity 3D reconstructions.
+      However, at inference time, they must be driven by limited inputs such as <span style="color: #98b779">partial views recorded by headset-mounted cameras, frontal-view images or sparse facial landmarks from a front-facing camera</span>.
+    </p>
+    <br/>
+    <img src="static/media/settings.png" height="300" class="center">
+    <br/><br/><br/>
+    <p>
+      To mitigate this asymmetry, we introduce a prior model that is conditioned on the runtime inputs and tie this prior space to the 3D face model via a normalizing flow in the latent space.
+      Our proposed model, <strong>LiP-Flow</strong>, consists of two encoders that learn representations from the rich training-time and impoverished inference-time observations. 
+    </p>
+    <br/>
+    <img src="static/media/overview_description.png" height="300" class="center">
+    <br/><br/>
+    <p>
+      The normalizing flow network bridges the two representation spaces and transforms latent samples from one domain to another, allowing us to define a latent likelihood objective. 
+      We trained our model end-to-end to maximize the similarity of both representation spaces and the reconstruction quality, making the 3D face model aware of the limited driving signals. 
+      <!-- We conduct extensive evaluations where the latent codes are optimized to reconstruct 3D avatars from partial or sparse observations. 
+      We show that our approach leads to an expressive and effective prior, capturing facial dynamics and subtle expressions better. -->
+    </p>
+    <!-- <img src="static/media/talking_reconstruction_800.gif" height="200" class="center"> -->
   </div>
 </section>
+
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+    <h2 class="title">Inference-time Optimization</h2>
+  </div>
+  <p>
+    The inference-time encoder learns a prior distribution over less informative driving signals, which is more expressive than the standard Gaussian prior.
+    Here we visualize samples from the estimated prior distribution given 2D keypoints as input. 
+  </p>  
+  <img src="static/media/prior_samples.png" height="300" class="center">
+  <br/>
+  <p>
+    Our learned prior is able to capture the variance due to missing information in the observations.
+  We leverage it for inference-time optimization, where the latent code is fitted to observations.
+  In addition to the reconstruction objective, we estimate the likelihood of the latent codes by using our learned prior.
+  </p>  
+    
+    <img src="static/media/optimization_hmc.png" height="300" class="center">
+    
+    <!-- <br/><br/><br/>
+    <img src="static/media/qual_comparison.png" height="300" class="center">
+    
+    <p>
+      <strong>Driving a 3D avatar with impoverished inputs</strong>.
+      For the <strong>DAM</strong> (a) and our proposed model <strong>LiP-Flow</strong> (e), we first optimize latent codes to reconstruct the inference-time observations, 
+      and then reconstruct the full face. For the <strong>DAM Regressor</strong>> baseline (c), we train a regressor to directly predict latent codes from the inference-time inputs
+       by using the pretrained DAM-encoder <strong>Q</strong>. 
+    </p>   -->
+</section>
+
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+    <h2 class="title">Baselines</h2>
+  </div>
+    <img src="static/media/baselines.png" height="300" class="center">
+    <p>
+      <!-- We compare our LiP-Flow with various baselines implementing different representation learning approaches. -->
+      <strong>An overview of latent space concepts</strong> illustrated with HMC inputs. Details are skipped for brevity.      
+      The decoder, <strong>D</strong>, decodes a view-specific texture and mesh for a given view vector <strong>v</strong> and a latent code <strong>z</strong>. 
+      </p>
+
+      <br/>
+      <ul style="list-style-type: none">
+        <li>(a) The Deep Appearance Model (DAM) of Lombardi et al. (2018) following the conditional VAE framework with <strong>N(0,I)</strong> prior. </li>
+        <li>(b) Replacing the DAM-encoder <strong>Q</strong> with the HMC-encoder <strong>P</strong>. The decoder is trained with the HMC images directly.</li>
+        <li>(c) Learning to regress the latent codes for HMC views by using a pretrained DAM-encoder <strong>Q</strong>. </li>
+        <li>(d) Training the HMC-encoder as a conditional prior model by minimizing the KL-divergence objective. </li>
+        <li>(e) Our <strong>LiP-Flow</strong> introduces a normalizing flow bridging the latent space of <strong>Q</strong> and <strong>P</strong>.</li>
+     </ul>
+     <br/>
+     <p>
+     For extensive qualitative and quantitative comparisons, checkout 
+     <a href="https://ait.ethz.ch/projects/2022/lip-flow/downloads/lipflow_eccv22.pdf" target="_blank">paper</a> and <a href="https://youtu.be/whuBUXfzeKs" target="_blank">video</a>.
+    </p>
+</section>
+
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+    <h2 class="title">Results</h2>
+  </div>
+    <img src="static/media/qual_comparison.png" height="300" class="center">
+    
+    <p>
+      <strong>Driving a 3D avatar with impoverished inputs</strong>.
+      For the <strong>DAM</strong> (a) and our proposed model <strong>LiP-Flow</strong> (e), we first optimize latent codes to reconstruct the inference-time observations, 
+      and then reconstruct the full face. For the <strong>DAM Regressor</strong> baseline (c), we train a regressor to directly predict latent codes from the inference-time inputs
+       by using the pretrained DAM-encoder <strong>Q</strong>. 
+    </p>  
+    <br/><br/>
+    
+    <video width="100%" poster="" id="chair-tp" autoplay="" controls="" muted="" loop="" height="100%">
+      <source src="static/media/res1.mp4" ,="" type="video/mp4">
+    </video>
+    <video width="100%" poster="" id="chair-tp" autoplay="" controls="" muted="" loop="" height="100%">
+      <source src="static/media/res2.mp4" ,="" type="video/mp4">
+    </video>
+    <p>
+      <strong>Driving a 3D avatar with impoverished inputs</strong>. Fitting targets are on the left. Here we flip the rendered and the ground-truth images for a better comparison.
+    </p>
+    
+</section>
+
+<section class="section" id="result">
+  <div class="container is-max-desktop content">
+    <div class="columns is-centered has-text-centered">
+    <h2 class="title">Random Samples from Standard Gaussian Prior</h2>
+  </div>
+    <p>
+      Here we compare our flow-based latent space formulation with the KL-Divergence by using the standard prior Gaussian. We visualize reconstruction results for random latent samples from the standard prior.
+    </p>
+    <center>
+      <img width="80%" src="static/media/lip-flow_normal.png" height="200" class="center">
+    <video width="80%" poster="" id="chair-tp" autoplay="" controls="" muted="" loop="" height="100%">
+      <source src="static/media/random_samples.mp4" ,="" type="video/mp4">
+    </video>
+    <p>
+      Our method (right) learns a more expressive latent space that leads to higher quality and more diverse samples.
+    </p>
+    </center>
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{aksan2022lip,
+      title={LiP-Flow: Learning Inference-time Priors for Codec Avatars via Normalizing Flows in Latent Space},
+      author={Aksan, Emre and Ma, Shugao and Caliskan, Akin and Pidhorskyi, Stanislav and Richard, Alexander and Wei, Shih-En and Saragih, Jason and Hilliges, Otmar},
+      booktitle={European Conference on Computer Vision (ECCV)},
+      year={2022}
+    }</code></pre>
+  </div>
+</section>
+
+
 </body>
 </html>
